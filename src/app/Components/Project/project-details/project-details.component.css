@@ -1,0 +1,83 @@
+/* In styles.css */
+
+.ts-dropdown-content /* The drop down menu that appear*/
+{
+    font-size: 16px;
+    border: none;
+}
+
+.ts-control /* the container the hold the input */
+{
+    font-size: 15px;
+    padding: 0;
+    border: none;
+    min-height: 24px;
+}
+
+.ts-control input 
+{  
+    font-size: 1rem;
+}
+
+.ts-wrapper.multi .ts-control > div  /*div container that has the div selected item and a that represent x sign */
+{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #030321;
+    color: white;
+    font-weight: bold;
+}
+
+.ts-wrapper.multi .ts-control > div.active /*WHEN I click on */
+{
+    background-color: red;
+    color: black;
+}
+
+
+
+.form-container{
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media (max-width: 576px){ /* extra small screen */
+        .form-container{
+            width: 96%;
+        }
+}
+
+@media (min-width: 576px){ /* small screen */
+        .form-container{
+            width: 90%;
+        }
+}
+
+@media (min-width: 768px){ /* Medium  screen */
+        .form-container{
+            width: 70%;
+        }
+}
+
+.form-header{
+    font-family: monospace;
+    font-size: 32px;
+    color: white; 
+    text-align: center; 
+    background-color: black;
+    padding: 10px 35px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(209, 28, 28, 0.1); 
+    width: fit-content;
+    position: absolute;
+    font-weight: 700;   
+}
+
+@media (max-width: 576px){ /* small screen */
+    .form-header{
+        font-size: 24px;
+    }
+}

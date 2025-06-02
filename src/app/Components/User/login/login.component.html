@@ -1,0 +1,47 @@
+
+
+<div class="form-container bg-body-secondary rounded-3 mt-5 pt-1 position-relative">
+    <h2 class="form-header position-absolute top-0 start-50 translate-middle">Login</h2>
+
+    <form [formGroup]="loginForm" (submit)="loginUser()">
+        <div class="row mt-5 p-2 mx-2">
+
+            
+            <div  *ngIf="wrongCredentials" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> wrong email or password
+            </div>
+              
+            <div  *ngIf="isEmailNotConfirmed" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> confirm your email
+            </div>
+
+            <div class="form-group col-12 mb-3">
+                <label class="ms-1">Email</label>
+                <input class="form-control" type="text" placeholder="Enter your email" formControlName="email">
+
+                <ng-container *ngIf="getEmail.touched">
+                    <div *ngIf="getEmail.hasError('required')" class="text-danger form-text ms-1">email is required</div>
+                </ng-container> 
+            </div>
+    
+            <div class="form-group col-12 mb-3">
+                <label class="ms-1">Password</label>
+                <input class="form-control" type="password" placeholder="Enter your password" formControlName="password">
+                <ng-container *ngIf="getPassword.touched">
+                    <div *ngIf="getPassword.hasError('required')" class="text-danger form-text ms-1">password is required</div>
+                </ng-container> 
+            </div>
+          
+            <div class="form-group mb-2 col-sm-6">
+                <a class="text-primary text-decoration-underline ms-sm-auto" style="cursor: pointer;" routerLink="/forgetPassword">Forget my password</a>                           
+            </div>
+
+            <div class="form-group mb-2 col-sm-6 d-flex">
+                <a class="text-primary text-decoration-underline ms-sm-auto" style="cursor: pointer;" routerLink="/register">Don't have an account?</a>                
+            </div>
+
+            <button type="submit" class="btn btn-success col-6 col-md-4 m-auto fs-5">Submit</button>
+
+        </div>
+    </form>
+</div>

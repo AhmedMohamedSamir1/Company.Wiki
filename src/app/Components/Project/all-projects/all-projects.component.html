@@ -1,0 +1,158 @@
+<div class="card shadow">
+
+    <div class="card-title d-flex justify-content-between mx-3 mt-3">
+  
+        <h3 class="d-flex align-items-center mb-0 custom-font-size">Projects Page</h3>
+        
+        <div class="me-2">
+            @if (authService.isAdmin()) {
+                <a class="btn btn-outline-primary" [routerLink]="['/admin/project/add']">Add Project</a>
+            }
+            @else {
+
+                <a class="btn btn-outline-primary" [routerLink]="['/user/project/add']">Add Project</a>
+            }
+        </div>
+    </div>
+  
+    <hr />
+  
+    <div class="card-body">
+  
+        
+        <form action="">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-8 col-lg-6">
+                    <div class="input-group div-search">
+                        <select class="form-select" style="flex: 0 1 150px;"  [(ngModel)]="searchType" [ngModelOptions]="{standalone: true}" >
+                            @for (item of SearchTypes; track $index) {
+                                <option [value]="item.Value">{{item.Text}}</option>
+                            }
+                            
+                           
+                        </select>
+                        <input [(ngModel)]="searchText" (keydown)="applySearch($event)" type="text" class="form-control input-search" placeholder="Search" name="SearchText">
+                        <button class="btn btn-info text-white" (click)="searchIconClick()"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+  
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover mt-3 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Owner</th>
+                        <th scope="col">Tags</th>
+                        <th scope="col">Technologies</th>
+                        <th scope="col">Dependencies</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of pagedProjects?.items; track $index) {
+                        <tr class="align-middle">
+
+                            <td scope="col"> {{item.id}}</td>
+                            <td scope="col"> {{item.name}}</td>
+                            <td scope="col"> {{item.projectOwner}}</td>
+                            <td>
+                                <select class="form-select">
+                                    @for (tag of item.tags; track $index) {
+                                        <option [value]="tag.id">{{tag.name}}</option>
+                                    }
+                                </select>
+                            </td>
+
+                            <td>
+                                <select class="form-select">
+                                    @for (tech of item.technologies; track $index) {
+                                        <option [value]="tech.id">{{tech.name}}</option>
+                                    }
+                                </select>
+                            </td>
+
+                            <td>
+                                <select class="form-select">
+                                    @for (dep of item.dependencies; track $index) {
+                                        <option [value]="dep.id">{{dep.name}}</option>
+                                    }
+                                </select>
+                            </td>
+
+                           <td> <a [href]="item.projectLink" target="_blank">Project Link</a></td>
+                            <td scope="col" class="">
+                                @if (authService.isAdmin()) {
+                                    <a class="btn btn-secondary btn-sm me-1" [routerLink]="['/admin/project/edit', item.id]">Edit</a>
+                                    <a class="btn btn-success btn-sm me-1" [routerLink]="['/admin/project/details', item.id]">Details</a>
+                                    <a class="btn btn-danger btn-sm" (click)="deleteProject(item.id, item.name)">Delete</a>
+                                }
+                                @else if (authService.isUser()) {
+                                    <a class="btn btn-success btn-sm me-1" [routerLink]="['/user/project/details', item.id]">Details</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if ( pagedProjects?.items?.length==0)
+            {
+                <h5 class="text-center">There's no items to view.</h5>
+            }
+
+        </div>
+       
+        <nav style="cursor: pointer;" *ngIf="pagedProjects?.totalPages! > 0">
+            <ul class="pagination justify-content-start flex-wrap">
+          
+              <!-- Previous Button -->
+              <li class="page-item" [class.disabled]="!pagedProjects?.hasPrevious">
+                <a class="page-link" (click)="getByPage(pagedProjects?.currentPage! - 1)">Previous</a>
+              </li>
+          
+              <!-- First Page with Ellipsis -->
+              <ng-container *ngIf="pagedProjects?.currentPage! > 3">
+                <li class="page-item">
+                  <a class="page-link" (click)="getByPage(1)">1</a>
+                </li>
+          
+                <ng-container *ngIf="pagedProjects?.currentPage! > 4">
+                  <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                  </li>
+                </ng-container>
+              </ng-container>
+          
+              <!-- Page Numbers -->
+              <ng-container *ngFor="let pageNumber of generatePageNumbers(); let i = index">
+                <li class="page-item" [class.active]="pageNumber === pagedProjects?.currentPage">
+                  <a class="page-link" (click)="getByPage(pageNumber)">{{ pageNumber }}</a>
+                </li>
+              </ng-container>
+          
+              <!-- Last Page with Ellipsis -->
+              <ng-container *ngIf="pagedProjects?.currentPage! < pagedProjects?.totalPages! - 2">
+                <ng-container *ngIf="pagedProjects?.currentPage! < pagedProjects?.totalPages! - 3">
+                  <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                  </li>
+                </ng-container>
+                <li class="page-item">
+                  <a class="page-link" (click)="getByPage(pagedProjects?.totalPages!)">{{ pagedProjects?.totalPages }}</a>
+                </li>
+              </ng-container>
+          
+              <!-- Next Button -->
+              <li class="page-item" [class.disabled]="!pagedProjects?.hasNext">
+                <a class="page-link" (click)="getByPage(pagedProjects?.currentPage! + 1)">Next</a>
+              </li>
+          
+            </ul>
+        </nav>
+    </div>
+  
+  </div>
+  

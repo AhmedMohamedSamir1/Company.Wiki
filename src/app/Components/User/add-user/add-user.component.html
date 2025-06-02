@@ -1,0 +1,62 @@
+<div class="form-container mt-5 pt-1 position-relative rounded-3 pb-3">
+
+    <h2 class="form-header position-absolute top-0 start-50 translate-middle">Add User</h2>
+    
+    <form [formGroup]="userForm" (submit)="registerUser()">
+        <div class="row w-75 mx-auto mt-5">
+            <div class="form-group mb-3">
+                <label class="form-label text-light">Name</label>
+                <input class="form-control" placeholder="Enter your name" formControlName="name" type="text">
+                <ng-container *ngIf="getName.touched">
+                    <div *ngIf="getName.hasError('required')" class="text-danger form-text">name is required</div>
+                </ng-container>
+
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label text-light">Email</label>
+                <input class="form-control" placeholder="Enter your email" formControlName="email" type="email">
+
+                <ng-container *ngIf="getEmail.touched">
+                    <div *ngIf="getEmail.hasError('required')" class="text-danger form-text">email is required</div>
+                    <div *ngIf="getEmail.hasError('pattern')" class="text-danger form-text">email is not in valid format</div>
+                    <div *ngIf="getEmail.hasError('emailTaken')" class="text-danger form-text">Email is already taken</div>
+                    
+                </ng-container>
+
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label text-light">Password</label>
+                <input class="form-control" placeholder="Enter your password" formControlName="password" type="password">
+
+                <ng-container *ngIf="getPassword.touched">
+                    <div *ngIf="getPassword.hasError('required')" class="text-danger form-text">password is required</div>
+                    <div *ngIf="getPassword.hasError('pattern')" class="text-danger form-text">password must contain at least one uppercase letter, one special character, and be at least 8 characters long.</div>
+                </ng-container>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label text-light">Phone Number</label>
+                <input class="form-control" placeholder="Enter your phone" formControlName="phoneNumber">
+            
+                <ng-container *ngIf="getPhoneNumber.touched">
+                    <div *ngIf="getPhoneNumber.hasError('required')" class="text-danger form-text">phone is required</div>
+                    <div *ngIf="getPhoneNumber.hasError('pattern')" class="text-danger form-text">Phone number must be valid</div>
+                </ng-container>
+
+            </div>
+
+            @if(isLoading){
+                <div class="spinner-border mx-auto" role="status"></div>
+
+            }@else {
+                <div class="col-sm-12 mx-sm-auto mb-3 mt-4">
+                    <button type="submit" class="btn btn-info w-100 btn-register">Register</button>
+                </div>
+            }
+
+        </div>
+    </form>
+
+</div>

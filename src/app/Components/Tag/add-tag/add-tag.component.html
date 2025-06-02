@@ -1,0 +1,20 @@
+
+<div class="container">
+    
+    <p>Add tag</p>
+
+    <form [formGroup]="tagForm" class="mt-5" (submit)="addTag()">
+        <div class="form-group mb-3">
+            <label class="form-label">tag name</label>
+            <input class="form-control" placeholder="Enter tag name" formControlName="name">
+
+            <ng-container *ngIf="getName.touched">
+                <div *ngIf="getName.hasError('required')" class="text-danger">name is required</div>
+                <div *ngIf="getName.hasError('tagTaken')" class="text-danger">name must be unique</div>
+            </ng-container>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">submit</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,79 @@
+<div class="form-container bg-info rounded-3 mt-5 pt-1 position-relative">
+
+    <h2 class="form-header position-absolute top-0 start-50 translate-middle">Project Details</h2>
+  
+      <div class="row mt-5 p-2 mx-2">
+  
+        <!-- project name -->
+        <div class="form-group mb-3">
+          <label class="ms-2 form-label">Name [required]</label>
+          <input class="form-control" id="project" formControlName="projectName" [value]="ProjectGetDTO?.name" readonly>
+        </div>
+      
+        <!-- tags -->
+        <div class="form-group mb-3">
+          <label class="ms-2 form-label">Tags [required]</label>
+          <select class="form-select" id="select-tags" multiple ></select>
+        </div>
+      
+        <!-- technologies -->
+        <div class="form-group mb-3">
+          <label class="ms-2 form-label">Technologies [required]</label>
+          <select class="form-select" id="select-technologies" multiple ></select>
+        </div>
+      
+        <!-- dependencies -->
+        <div class="form-group mb-3">
+          <label class="ms-2 form-label">Dependencies [required]</label>
+          <select class="form-select" id="select-dependencies" multiple></select>
+    
+        </div>
+      
+        <!-- description -->
+        <div class="mb-3 form-group">
+          <label class="ms-2 form-label">Description [required]</label>
+          <textarea data-gramm="false" class="form-control" rows="4" style="resize: none;" readonly >{{ProjectGetDTO?.description}}</textarea>
+        </div>
+      
+        <!-- project link -->
+        <div class="mb-3 form-group">
+          <label class="ms-2 form-label">Project-link [required]</label>
+          <input class="form-control"readonly [value]="ProjectGetDTO?.projectLink" >
+        </div>
+      
+        <!-- instructions -->
+        <div class="mb-3 form-group">
+          <label class="ms-2 form-label">Instructions [required]</label>
+          <textarea data-gramm="false" class="form-control" rows="4" style="resize: none;"readonly>{{ProjectGetDTO?.instructions}}</textarea>
+        </div>
+      
+        <!-- website link -->
+        <div class="mb-3 form-group">
+          <label class="ms-2 form-label">Website-link [optional]</label>
+          <input class="form-control"readonly [value]="ProjectGetDTO?.websiteLink">
+        </div>
+      
+        <!-- brand -->
+        <div class="mb-3 form-group col-12 col-md-6">
+          <label class="ms-2 form-label">Brand [optional]</label>
+          <input class="form-control"readonly [value]="ProjectGetDTO?.brand">
+        </div>
+  
+        <!-- client -->
+        <div class="mb-4 form-group  col-12 col-md-6">
+          <label class="ms-2 form-label">Client [optional]</label>
+          <input class="form-control"readonly [value]="ProjectGetDTO?.client">
+        </div>
+      
+        @if (auth.isAdmin()) {
+          <a class="btn btn-success col-sm-8 col-md-4 m-auto fs-5 mb-2" routerLink="/admin/project">Back</a>
+        }
+        @else if (auth.isUser()) {
+          <a class="btn btn-success col-sm-8 col-md-4 m-auto fs-5 mb-2" routerLink="/user/project">Back</a>
+          
+        }
+        
+      </div>
+   
+  </div>
+  

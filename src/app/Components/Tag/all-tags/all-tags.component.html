@@ -1,0 +1,122 @@
+
+
+<div class="card shadow">
+
+    <div class="card-title d-flex justify-content-between mx-3 mt-3">
+
+        <h3 class="d-flex align-items-center">Tags Page</h3>
+        
+        <div class="me-2">
+          @if (authService.isAdmin()) {
+            <a class="btn btn-outline-primary fs-5" [routerLink]="['/admin/tag/add']">Add Tag</a>
+          }@else if(authService.isUser()){
+            <a class="btn btn-outline-primary fs-5" [routerLink]="['/user/tag/add']">Add Tag</a>
+          }
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="card-body">
+
+        <form action="">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="input-group div-search">
+                        <input [(ngModel)]="searchText" (keydown)="applySearch($event)" type="text" class="form-control input-search" placeholder="Search" name="SearchText">
+                        <span (click)="searchIconClick()" class="input-group-text btn-search"><i class="bi bi-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover mt-3 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col">Date Modified</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of pagedTags?.items; track $index) {
+                        <tr class="align-middle">
+
+                            <td scope="col"> {{item.id}}</td>
+                            <td scope="col"> {{item.name}}</td>
+                            <td scope="col"> {{ item.createdDate | date: 'yyyy-MM-dd hh:mm:ss aa' }}</td>
+                            <td scope="col"> {{ item.modifiedDate | date: 'yyyy-MM-dd hh:mm:ss aa' }}</td>
+                            <td scope="col" class="">
+                              @if (authService.isAdmin()) {
+                                <a class="btn btn-outline-secondary btn-sm me-1" [routerLink]="['/admin/tag/edit', item.id]">Edit</a>
+                              }
+                              @else if (authService.isUser()) {
+                                <a class="btn btn-outline-secondary btn-sm me-1" [routerLink]="['/user/tag/edit', item.id]">Edit</a>
+                              }
+                              <a class="btn btn-outline-danger btn-sm" (click)="deleteTag(item.id, item.name)">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if ( pagedTags?.items?.length==0)
+            {
+                <h5 class="text-center">There's no items to view.</h5>
+            }
+
+        </div>
+
+       
+        <nav style="cursor: pointer;" *ngIf="pagedTags?.totalPages! > 0">
+            <ul class="pagination justify-content-start flex-wrap">
+          
+              <!-- Previous Button -->
+              <li class="page-item" [class.disabled]="!pagedTags?.hasPrevious">
+                <a class="page-link" (click)="getByPage(pagedTags?.currentPage! - 1)">Previous</a>
+              </li>
+          
+              <!-- First Page with Ellipsis -->
+              <ng-container *ngIf="pagedTags?.currentPage! > 3">
+                <li class="page-item">
+                  <a class="page-link" (click)="getByPage(1)">1</a>
+                </li>
+          
+                <ng-container *ngIf="pagedTags?.currentPage! > 4">
+                  <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                  </li>
+                </ng-container>
+              </ng-container>
+          
+              <!-- Page Numbers -->
+              <ng-container *ngFor="let pageNumber of generatePageNumbers(); let i = index">
+                <li class="page-item" [class.active]="pageNumber === pagedTags?.currentPage">
+                  <a class="page-link" (click)="getByPage(pageNumber)">{{ pageNumber }}</a>
+                </li>
+              </ng-container>
+          
+              <!-- Last Page with Ellipsis -->
+              <ng-container *ngIf="pagedTags?.currentPage! < pagedTags?.totalPages! - 2">
+                <ng-container *ngIf="pagedTags?.currentPage! < pagedTags?.totalPages! - 3">
+                  <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                  </li>
+                </ng-container>
+                <li class="page-item">
+                  <a class="page-link" (click)="getByPage(pagedTags?.totalPages!)">{{ pagedTags?.totalPages }}</a>
+                </li>
+              </ng-container>
+          
+              <!-- Next Button -->
+              <li class="page-item" [class.disabled]="!pagedTags?.hasNext">
+                <a class="page-link" (click)="getByPage(pagedTags?.currentPage! + 1)">Next</a>
+              </li>
+          
+            </ul>
+          </nav>
+    </div>
+
+</div>

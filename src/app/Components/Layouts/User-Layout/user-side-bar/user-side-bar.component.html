@@ -1,0 +1,119 @@
+
+
+
+<aside id="sidebar" class="expand">
+
+    <div class="d-flex">
+        
+        <button class="toggle-btn" type="button" (click)="toggleSidebar()">
+            <i class="bi bi-arrows-fullscreen"></i>
+        </button>
+
+        <div class="sidebar-logo">
+            <a class="disabled">Offbeat.wiki</a>
+        </div>
+        
+    </div>
+
+    <ul class="sidebar-nav">
+         
+            <li class="sidebar-item">
+
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#project-options" aria-expanded="false" aria-controls="project-options">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Projects</span>
+                </a>
+
+                <ul id="project-options" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" routerLink="/user/project">
+                        <a class="sidebar-link" [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">All projects</a>
+                    </li>       
+                    
+                    <li class="sidebar-item" routerLink="/user/project/add">
+                        <a class="sidebar-link" [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">New project</a>
+                    </li>
+                    
+                </ul>
+            </li>
+        
+            
+            
+
+
+
+            <li class="sidebar-item">
+    
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#tag-options" aria-expanded="false" aria-controls="tag-options">
+                    <i class="bi bi-sign-intersection-t"></i>
+                    <span>Tags</span>
+                </a>
+                
+                <ul id="tag-options" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item cursor-pointer" routerLink="/user/tag">
+                        <a class="sidebar-link" [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">All tags</a>
+                    </li>
+    
+                    <li class="sidebar-item cursor-pointer" routerLink="/user/tag/add">
+                        <a class="sidebar-link"  [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">New tag</a>
+                    </li>
+                    
+                </ul>
+
+            </li>
+        
+      
+        
+            <li class="sidebar-item">
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#technology-options" aria-expanded="false" aria-controls="technology-options">
+                    <i class="bi bi-rocket-takeoff"></i>
+                    <span>Technologies</span>
+                </a>
+
+                <ul id="technology-options" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+    
+                    <li class="sidebar-item cursor-pointer" routerLink="/user/technology">
+                        <a class="sidebar-link" [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">All technologies</a>
+                    </li>
+
+                    <li class="sidebar-item cursor-pointer" routerLink="/user/technology/add">
+                        <a class="sidebar-link"  [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">New technology</a>
+                    </li>
+                </ul>
+            </li>
+        
+            
+
+            <li class="sidebar-item">
+                
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#dependency-options" aria-expanded="false" aria-controls="dependency-options">
+                    <i class="bi bi-boxes"></i>
+    
+                    <span>Dependencies</span>
+                </a>
+                
+                <ul id="dependency-options" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item cursor-pointer" routerLink="/user/dependency">
+                        <a class="sidebar-link" [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">All dependencies</a>
+                    </li>
+    
+                    <li class="sidebar-item cursor-pointer" routerLink="/user/dependency/add">
+                        <a class="sidebar-link"  [routerLinkActive]="'selected'" [routerLinkActiveOptions] = "{ exact: true }">New dependency</a>
+                    </li>
+    
+    
+                </ul>
+            </li>
+        
+    </ul>
+
+    <div class="sidebar-footer">
+        <a class="sidebar-link" (click)="logout()">
+            <i class="bi bi-box-arrow-left"></i>
+            <span class="align-text-bottom">Logout</span>
+        </a>
+    </div>
+</aside>

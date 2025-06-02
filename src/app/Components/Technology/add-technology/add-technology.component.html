@@ -1,0 +1,20 @@
+
+<div class="container">
+    
+    <p>Add technology</p>
+
+    <form [formGroup]="technologyForm" class="mt-5" (submit)="addTechnology()">
+        <div class="form-group mb-3">
+            <label class="form-label ms-1">technology name</label>
+            <input class="form-control" placeholder="Enter technology name" formControlName="name">
+
+            <ng-container *ngIf="getName.touched">
+                <div *ngIf="getName.hasError('required')" class="text-danger ms-2">name is required</div>
+                <div *ngIf="getName.hasError('techTaken')" class="text-danger ms-2">name must be unique</div>
+            </ng-container>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">submit</button>
+        </div>
+    </form>
+</div>

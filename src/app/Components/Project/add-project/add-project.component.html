@@ -1,0 +1,98 @@
+
+<div class="loading {{isLoading?'d-block':''}}"> Loading&#8230;</div>
+
+<div class="form-container rounded-3 mt-5 pt-1 position-relative">
+
+  <h2 class="form-header position-absolute top-0 start-50 translate-middle">Add project</h2>
+
+
+  <form [formGroup]="projectForm" (submit)="addProject()">  
+    <div class="row mt-5 p-2 mx-2">
+
+      <!-- project name -->
+      <div class="form-group mb-3">
+        <label class="ms-2 form-label">Name [required]</label>
+        <input class="form-control" id="project" placeholder="Enter project name" formControlName="projectName">
+        <ng-container *ngIf="getProjectName.touched">
+          <div *ngIf="getProjectName.hasError('required')" class="text-danger">Project name is required</div>
+          <div *ngIf="getProjectName.hasError('nameTaken')" class="text-danger">Project name must be unique</div>
+        </ng-container>
+      </div>
+    
+      <!-- tags -->
+      <div class="form-group mb-3">
+        <label class="ms-2 form-label">Tags [required]</label>
+        <select class="form-select" id="select-tags" formControlName="projectTags" multiple></select>
+        <ng-container *ngIf="getProjectTags.touched">
+          <div *ngIf="getProjectTags.hasError('required')" class="text-danger">Tags are required</div>
+        </ng-container>
+      </div>
+    
+      <!-- technologies -->
+      <div class="form-group mb-3">
+        <label class="ms-2 form-label">Technologies [required]</label>
+        <select class="form-select" id="select-technologies" formControlName="projectTechnologies" multiple></select>
+        <ng-container *ngIf="getProjectTechnologies.touched">
+          <div *ngIf="getProjectTechnologies.hasError('required')" class="text-danger">Technologies are required</div>
+        </ng-container>
+      </div>
+    
+      <!-- dependencies -->
+      <div class="form-group mb-3">
+        <label class="ms-2 form-label">Dependencies [required]</label>
+        <select class="form-select" id="select-dependencies" formControlName="projectDependencies" multiple></select>
+        <ng-container *ngIf="getProjectDependencies.touched">
+          <div *ngIf="getProjectDependencies.hasError('required')" class="text-danger">Dependencies are required</div>
+        </ng-container>
+      </div>
+    
+      <!-- description -->
+      <div class="mb-3 form-group">
+        <label class="ms-2 form-label">Description [required]</label>
+        <textarea data-gramm="false" class="form-control" rows="2" style="resize: none;" placeholder="Enter project description" formControlName="projectDescription"></textarea>
+        <ng-container *ngIf="getProjectDescription.touched">
+          <div *ngIf="getProjectDescription.hasError('required')" class="text-danger">Description is required</div>
+        </ng-container>
+      </div>
+    
+      <!-- project link -->
+      <div class="mb-3 form-group">
+        <label class="ms-2 form-label">Project-link [required]</label>
+        <input class="form-control" placeholder="Enter project link" formControlName="projectLink">
+        <ng-container *ngIf="getProjectLink.touched">
+          <div *ngIf="getProjectLink.hasError('required')" class="text-danger">Project link is required</div>
+        </ng-container>
+      </div>
+    
+      <!-- instructions -->
+      <div class="mb-3 form-group">
+        <label class="ms-2 form-label">Instructions [required]</label>
+        <textarea data-gramm="false" class="form-control" rows="2" style="resize: none;" placeholder="Enter instructions" formControlName="projectInstructions"></textarea>
+        <ng-container *ngIf="getProjectInstructions.touched">
+          <div *ngIf="getProjectInstructions.hasError('required')" class="text-danger">Instructions are required</div>
+        </ng-container>
+      </div>
+    
+      <!-- website link -->
+      <div class="mb-3 form-group">
+        <label class="ms-2 form-label">Website-link [optional]</label>
+        <input class="form-control" placeholder="Enter website link" formControlName="projectWebsiteLink">
+      </div>
+    
+      <!-- brand -->
+      <div class="mb-3 form-group col-12 col-md-6">
+        <label class="ms-2 form-label">Brand [optional]</label>
+        <input class="form-control" placeholder="Enter brand" formControlName="projectBrand">
+      </div>
+
+      <!-- client -->
+      <div class="mb-4 form-group  col-12 col-md-6">
+        <label class="ms-2 form-label">Client [optional]</label>
+        <input class="form-control" placeholder="Enter client" formControlName="projectClient">
+      </div>
+    
+        <button type="submit" class="btn btn-success col-sm-8 col-md-4 m-auto fs-5 mb-2">Add Project</button>
+      
+    </div>
+  </form>
+</div>

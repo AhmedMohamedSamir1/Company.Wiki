@@ -1,0 +1,16 @@
+.custom-font-size {
+    font-size: 1.25rem; /* Default size */
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .custom-font-size {
+        font-size: 1.5rem; /* Larger size on medium and up */
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-font-size {
+        font-size: 1.75rem; /* Even larger size on large and up */
+    }
+}
